@@ -17,7 +17,7 @@
 
 **UAPRM (Uncertainty-Aware Process Reward Model)** is a novel generative verifier framework developed for my Master's Thesis. It addresses the critical **"Overconfidence"** issue in existing Generative PRMs (e.g., ThinkPRM).
 
-While standard Generative PRMs provide interpretable reasoning chains, they often fail to accurately quantify the probability of correctness for each step. **UAPRM** improves downstream search reliability (Best-of-N, Tree Search) by explicitly modeling **step-wise confidence scores**.
+While standard Generative PRMs provide interpretable reasoning chains, they often fail to accurately quantify the probability of correctness for each step. **UAPRM** improves downstream search reliability (ProcessBench, Best-of-N, Tree Search) by explicitly modeling **step-wise confidence scores**.
 
 > **Note:** This repository serves as an overview. The full source code and manuscript are currently private due to ongoing conference submission preparation.
 
