@@ -28,7 +28,7 @@ While standard Generative PRMs provide interpretable reasoning chains, they ofte
 The core difference lies in how the verifier evaluates reasoning steps.
 
 <div align="center">
-  <img src="./images/comparison.png" alt="ThinkPRM vs UAPRM Comparison" width="60%">
+  <img src="./images/comparison.png" alt="ThinkPRM vs UAPRM Comparison" width="75%">
   <p><em>Figure 1: Comparison of Inference Mechanisms. Unlike ThinkPRM which relies on implicit token probabilities, UAPRM generates explicit, calibrated confidence scores for each reasoning step.</em></p>
 </div>
 
@@ -42,7 +42,7 @@ The core difference lies in how the verifier evaluates reasoning steps.
 To train the model to be uncertainty-aware, we constructed a specialized dataset using **Step-wise Verification Sampling**.
 
 <div align="center">
-  <img src="./images/training_data.png" alt="UAPRM Training Data Example" width="60%">
+  <img src="./images/training_data.png" alt="UAPRM Training Data Example" width="75%">
   <p><em>Figure 2: Structure of the UAPRM Training Dataset. Instead of binary labels (0/1), we utilize soft labels derived from consistency checks to teach the model nuance and uncertainty.</em></p>
 </div>
 
