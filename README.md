@@ -19,16 +19,16 @@
 
 While standard Generative PRMs provide interpretable reasoning chains, they often fail to accurately quantify the probability of correctness for each step. **UAPRM** improves downstream search reliability (Best-of-N, Tree Search) by explicitly modeling **step-wise confidence scores**.
 
-> **Note:** This repository serves as a portfolio overview. The full source code and manuscript are currently private due to ongoing conference submission preparation.
+> **Note:** This repository serves as an overview. The full source code and manuscript are currently private due to ongoing conference submission preparation.
 
 ---
 
-## 🆚 Comparison: ThinkPRM vs. UAPRM
+## 📈 Performance: ThinkPRM vs. UAPRM
 
 The core difference lies in how the verifier evaluates reasoning steps.
 
 <div align="center">
-  <img src="./images/comparison.png" alt="ThinkPRM vs UAPRM Comparison" width="90%">
+  <img src="./images/comparison.png" alt="ThinkPRM vs UAPRM Comparison" width="50%">
   <p><em>Figure 1: Comparison of Inference Mechanisms. Unlike ThinkPRM which relies on implicit token probabilities, UAPRM generates explicit, calibrated confidence scores for each reasoning step.</em></p>
 </div>
 
@@ -42,7 +42,7 @@ The core difference lies in how the verifier evaluates reasoning steps.
 To train the model to be uncertainty-aware, we constructed a specialized dataset using **Step-wise Verification Sampling**.
 
 <div align="center">
-  <img src="./images/training_data.png" alt="UAPRM Training Data Example" width="85%">
+  <img src="./images/training_data.png" alt="UAPRM Training Data Example" width="50%">
   <p><em>Figure 2: Structure of the UAPRM Training Dataset. Instead of binary labels (0/1), we utilize soft labels derived from consistency checks to teach the model nuance and uncertainty.</em></p>
 </div>
 
@@ -67,17 +67,4 @@ Although the source code is private, the system consists of the following module
 | **Training Engine** | Custom trainer supporting confidence-weighted loss and QLoRA fine-tuning. | `transformers`, `peft`, `TokenWiseWeightedTrainer` |
 | **Inference Engine** | High-throughput generation for multi-path reasoning and verification. | `vLLM`, `SGLang`, `thinkprm_api.py` |
 | **Data Pipeline** | Automated pipeline for step-wise sampling and soft-label generation. | `asyncio`, `numpy` |
-| **Evaluation** | Benchmarking suite for Best-of-N and Weighted Voting. | `ProcessBench`, `math_verify` |
-
-### Key Logic Snippet (Conceptual)
-The core training logic involves applying a weight map to the loss based on the pre-computed confidence interval:
-
-```python
-# Conceptual logic from weighted_trainer.py
-class TokenWiseWeightedTrainer(Trainer):
-    def compute_loss(self, model, inputs, return_outputs=False):
-        # ... (forward pass) ...
-        # Apply custom weights based on confidence intervals (0.0 to 1.0)
-        # CONFIDENCE_WEIGHTS = {0.0: 20.15, ..., 1.0: 1.0}
-        weighted_loss = loss_fct(logits, labels) * confidence_weights
-        return weighted_loss.mean()
+| **Evaluation** | Benchmarking suite for Best-of-N and Weighted Voting. | `ProcessBench`, `MATH-500` |
